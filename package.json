@@ -20,9 +20,14 @@
     "next": "12.3.1",
     "next-connect": "^0.13.0",
     "next-pwa": "^5.6.0",
-    "react": "18.2.0",
+    "react": "^18.2.0",
     "react-aws-s3": "^1.5.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-multi-carousel": "^2.8.2",
+    "react-slick": "^0.29.0",
+    "react-swipe": "^6.0.4",
+    "swipe-js-iso": "^2.1.5",
+    "swiper": "^8.4.2"
   },
   "devDependencies": {
     "@types/formidable": "^2.0.5",
@@ -30,6 +35,8 @@
     "@types/node": "18.7.19",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
+    "@types/react-slick": "^0.23.10",
+    "@types/react-swipe": "^6.0.2",
     "eslint": "8.23.1",
     "eslint-config-next": "12.3.1",
     "prisma": "^4.3.1",
