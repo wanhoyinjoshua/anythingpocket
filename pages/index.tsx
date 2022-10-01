@@ -17,7 +17,7 @@ const Home: NextPage = () => {
         <link rel="manifest" href="/manifest.json" />
       </Head>
     <Link href="/api/auth/login">Login</Link>
-    <input type="file" accept="image/x-png,image/jpeg,image/gif"/>
+    <input type="file" accept="image/*" capture="environment"/>
     
   
     </>
