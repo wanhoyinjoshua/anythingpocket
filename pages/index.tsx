@@ -26,6 +26,7 @@ const Home: NextPage = () => {
   let reactSwipeEl: ReactSwipe | null;
   const [activeStep, setActiveStep] = React.useState<number|undefined>(0);
   const [Initialdata,setinitialData]= useState<any>({frontview:"", rearview:"",sideview:""})
+  const[second,setSecond]=useState<Boolean>(false)
   function next(swiper:any){
     console.log(swiper)
   var currentposition= swiper?.getPos()
@@ -66,8 +67,7 @@ const Home: NextPage = () => {
 
 
 
-
-   <Swiper
+{second==false&& <Swiper
       // install Swiper modules
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       spaceBetween={50}
@@ -172,7 +172,21 @@ const Home: NextPage = () => {
           <Slideback status={activeStep}></Slideback>
         }
       />
-    </Swiper>
+
+<button onClick={()=>{setSecond(true)}}>SHow second form</button>
+
+    </Swiper>}
+   
+
+    
+    {second&& <div>
+      <button onClick={()=>{setSecond(false)}}>SHow first form</button>
+      
+      seond form here
+
+      <button>Subit the form</button>
+      
+      </div>}
 
    
       
