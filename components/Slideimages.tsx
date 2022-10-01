@@ -12,7 +12,7 @@ export  function Slidenext(status: any) {
     <Button
     size="small"
     onClick={()=>swiper.slideNext()}
-    disabled={status.status === 3 - 1}
+    disabled={status.status === 4 - 1}
   >
     
     Next

@@ -25,7 +25,7 @@ const Home: NextPage = () => {
   const swiper = useSwiper();
   let reactSwipeEl: ReactSwipe | null;
   const [activeStep, setActiveStep] = React.useState<number|undefined>(0);
- 
+  const [Initialdata,setinitialData]= useState<any>({frontview:"", rearview:"",sideview:""})
   function next(swiper:any){
     console.log(swiper)
   var currentposition= swiper?.getPos()
@@ -56,7 +56,7 @@ const Home: NextPage = () => {
         <link rel="manifest" href="/manifest.json" />
       </Head>
     <Link href="/api/auth/login">Login</Link>
-    <input type="file" accept="image/*" capture="environment"/>
+    
   
    
    
@@ -79,22 +79,90 @@ const Home: NextPage = () => {
       onSlideChange={(e) => setActiveStep(e.activeIndex)}
     >
       <SwiperSlide><div>
-            <img src="http://placekitten.com/g/400/200" />
+        
+   
+        <label>Front view</label>
+        <input/>
+        <br>
+        </br>
+        {Initialdata.frontview==""?
+        <div>no picture yet 
+
+<input type="file" accept="image/*" capture="environment" 
+      onChange={(e)=>{
+    if (!e.target.files) return;
+    setinitialData({
+            ...Initialdata,
+            frontview:URL.createObjectURL(e.target.files[0])
+            
+        })}}/>
+          
+          
+           </div>:  <><Image src={`${Initialdata.frontview}`}
+        width={200}
+        height={400}
+        />
+
+<input type="file" accept="image/*" capture="environment" 
+      onChange={(e)=>{
+    if (!e.target.files) return;
+    setinitialData({
+            ...Initialdata,
+            frontview:URL.createObjectURL(e.target.files[0])
+            
+        })}}/>
+
+        </>
+
+        
+        
+        }
+      
+          
           </div></SwiperSlide>
       <SwiperSlide><div>
-            <img src="http://placekitten.com/g/400/200" />
+      <input type="file" accept="image/*" capture="environment"
+      onChange={(e)=>{
+        if (!e.target.files) return;
+        setinitialData({
+                ...Initialdata,
+                rearview:URL.createObjectURL(e.target.files[0])
+                
+            })}}/>
+             <Image src={`${Initialdata.rearview}`}
+        width={200}
+        height={400}
+        />
+          <label>Rear view</label>
+        <input/>
           </div></SwiperSlide>
+   
       <SwiperSlide><div>
-            <img src="http://placekitten.com/g/400/200" />
+      <input type="file" accept="image/*" capture="environment"
+      onChange={(e)=>{
+        if (!e.target.files) return;
+        setinitialData({
+                ...Initialdata,
+                sideview:URL.createObjectURL(e.target.files[0])
+                
+            })}}/>
+          <Image src={`${Initialdata.sideview}`}
+        width={200}
+        height={400}
+        />
+          <label>Side view</label>
+        <input/>
           </div></SwiperSlide>
-      <SwiperSlide><div>
+
+          <SwiperSlide><div>
+      <input type="file" accept="image/*" capture="environment"/>
             <img src="http://placekitten.com/g/400/200" />
           </div></SwiperSlide>
 
       
       
       <MobileStepper
-        steps={3}
+        steps={4}
         position="static"
         activeStep={activeStep}
         nextButton={
