@@ -11,10 +11,41 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import 'swiper/css';
 import { useSwiper } from 'swiper/react';
 import ReactSwipe from 'react-swipe';
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import MobileStepper from '@mui/material/MobileStepper';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import {Slidenext,Slideback} from '../components/Slideimages';
 const Home: NextPage = () => {
+  const theme = useTheme();let reference:  any
+  const swiper = useSwiper();
   let reactSwipeEl: ReactSwipe | null;
+  const [activeStep, setActiveStep] = React.useState<number|undefined>(0);
  
- 
+  function next(swiper:any){
+    console.log(swiper)
+  var currentposition= swiper?.getPos()
+  console.log(currentposition)
+
+  if(swiper&&currentposition!=null){
+    setActiveStep(currentposition+1)
+    swiper.slide(currentposition+1,500)}
+
+ }
+ function previous (swiper:ReactSwipe | null){
+  var currentposition= swiper?.getPos()
+  
+  if(swiper&&currentposition!=null){
+    setActiveStep(currentposition-1)
+    swiper.slide(currentposition-1,500)
+  }
+  
+
+ }
 
 
   return (
@@ -26,28 +57,58 @@ const Home: NextPage = () => {
       </Head>
     <Link href="/api/auth/login">Login</Link>
     <input type="file" accept="image/*" capture="environment"/>
-    <ReactSwipe
-        
-        swipeOptions={{ continuous: false }}
-        ref={el => (reactSwipeEl = el)}
-      >
-       <div>
-            <img src="http://placekitten.com/g/400/200" />
-          </div>
-          <div>
-            <img src="http://placekitten.com/g/400/200" />
-          </div>
-          <div>
-            <img src="http://placekitten.com/g/400/200" />
-          </div>
-          <div>
-            <img src="http://placekitten.com/g/400/200" />
-          </div>
-      </ReactSwipe>
-
-      <button onClick={() => {if(reactSwipeEl){reactSwipeEl.next()}}}>Next</button>
-      <button onClick={() => {if(reactSwipeEl){reactSwipeEl.prev()}}}>Previous</button>
   
+   
+   
+
+
+
+
+
+
+
+   <Swiper
+      // install Swiper modules
+      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      spaceBetween={50}
+      slidesPerView={1}
+      navigation
+      pagination={{ clickable: true }}
+      scrollbar={{ draggable: true }}
+      
+      onSlideChange={(e) => setActiveStep(e.activeIndex)}
+    >
+      <SwiperSlide><div>
+            <img src="http://placekitten.com/g/400/200" />
+          </div></SwiperSlide>
+      <SwiperSlide><div>
+            <img src="http://placekitten.com/g/400/200" />
+          </div></SwiperSlide>
+      <SwiperSlide><div>
+            <img src="http://placekitten.com/g/400/200" />
+          </div></SwiperSlide>
+      <SwiperSlide><div>
+            <img src="http://placekitten.com/g/400/200" />
+          </div></SwiperSlide>
+
+      
+      
+      <MobileStepper
+        steps={3}
+        position="static"
+        activeStep={activeStep}
+        nextButton={
+          <Slidenext status={activeStep}></Slidenext>
+        }
+        backButton={
+          <Slideback status={activeStep}></Slideback>
+        }
+      />
+    </Swiper>
+
+   
+      
+    
     </>
    
   )
