@@ -236,102 +236,30 @@ function handlePreview(){
     <div>
       <button onClick={()=>{setFirst(true);setSecond(false);setPreview(false)}}>SHow first form</button>
       
-      seond form here
-      <label>title of product</label>
-      <input value={Initialdata.title} type="text" onChange={(e)=>{setinitialData({
-            ...Initialdata,
-            title:e.target.value
-            
-        })}}/>
-<br></br>
-      <label>Breif overall description of the product</label>
-      <input value={Initialdata.description} type="text" onChange={(e)=>{setinitialData({
-            ...Initialdata,
-            description:e.target.value
-            
-        })}}></input>
-<br></br>
-<fieldset>
-      <label>Rental methods avalable </label>
-      <input type="radio" id="huey" name="drone2" checked={Initialdata.hour}
-             onClick={(e)=>{setinitialData({
-            ...Initialdata,
-            hour:!Initialdata.hour
-            
-        })}} />
-      <label htmlFor="huey">Hours</label>
 
-      <input type="radio" id="Days" name="drone" value="huey"
-           checked={Initialdata.Day}
-           onClick={(e)=>{setinitialData({
-            ...Initialdata,
-            Day:!Initialdata.Day
-            
-        })}} />
-      <label htmlFor="Days">Days</label>
-      <input type="radio" id="Months" name="drone1" value="huey"
-      checked={Initialdata.Month}
-      onClick={(e)=>{setinitialData({
-       ...Initialdata,
-       Month:!Initialdata.Month
-       
-   })}}
-            />
-      <label htmlFor="Months">Months</label>
-<br></br>
-</fieldset>
-
-{Initialdata.hour&&<><label>Hourly Price</label> 
-<input value={Initialdata.hourlyprice} 
- onChange={(e)=>{setinitialData({
-            ...Initialdata,
-            hourlyprice:parseInt(e.target.value)
-            
-        })}} type="number"/></>}
-        <br></br>
-{Initialdata.Day&&<><label>Daily Price</label> 
-<input value={Initialdata.dailyprice} 
- onChange={(e)=>{setinitialData({
-            ...Initialdata,
-            dailyprice:parseInt(e.target.value)
-            
-        })}} type="number"/></>}
-<br></br>
-{Initialdata.Month&&<><label>Monthly Price</label> 
-<input value={Initialdata.monthlyprice} 
- onChange={(e)=>{setinitialData({
-            ...Initialdata,
-            monthlyprice:parseInt(e.target.value)
-            
-        })}} type="number"/></>}
+     
       
-
-
 <br></br>
-      <label htmlFor="category">Caterory:</label>
 
-<select name="cars" id="cars"   onChange={(e)=>{setinitialData({
-            ...Initialdata,
-            category:e.target.value
-            
-        })}} >
-  <option selected={Initialdata.category=="Car"}value="Car">Car</option>
-  <option selected={Initialdata.category=="Toys"} value="Toys">Toys</option>
-  <option selected={Initialdata.category=="Kitchen"}value="Kitchen">Kitchen</option>
-  <option selected={Initialdata.category=="Makeup"}value="Makeup">Makeup</option>
-</select>
+
+    
+ 
+       
+
+
+
+
 
 
 <br></br>
 
-      <button onClick={handlePreview}>Preview the form</button>
       
       </div>
       <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
   <form>
     <div className="form-group mb-6">
       <label htmlFor="exampleInputEmail2" className="form-label inline-block mb-2 text-gray-700">Title of the post</label>
-      <input type="email" className="form-control
+      <input  className="form-control
         block
         w-full
         px-3
@@ -346,7 +274,13 @@ function handlePreview(){
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInputEmail2"
-        aria-describedby="emailHelp" placeholder="An Awesome title!!!"/>
+        aria-describedby="emailHelp" placeholder="An Awesome title!!!"
+        value={Initialdata.title} type="text" onChange={(e)=>{setinitialData({
+          ...Initialdata,
+          title:e.target.value
+          
+      })}}
+        />
     </div>
     <div className="form-group mb-6">
     <label htmlFor="exampleInputEmail2" className="form-label inline-block mb-2 text-gray-700">Description of the post</label>
@@ -371,6 +305,11 @@ function handlePreview(){
       id="exampleFormControlTextarea13"
       rows={3}
       placeholder="Message"
+      value={Initialdata.description}  onChange={(e)=>{setinitialData({
+        ...Initialdata,
+        description:e.target.value
+        
+    })}}
     ></textarea>
     </div>
 
@@ -390,13 +329,21 @@ function handlePreview(){
       transition
       ease-in-out
       m-0
-      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-        <option selected>Open this select menu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example"
+      onChange={(e)=>{setinitialData({
+        ...Initialdata,
+        category:e.target.value
+        
+    })}} 
+      >
+  <option selected value="null">Please select a category</option>
+  <option selected={Initialdata.category=="Car"}value="Car">Car</option>
+  <option selected={Initialdata.category=="Toys"} value="Toys">Toys</option>
+  <option selected={Initialdata.category=="Kitchen"}value="Kitchen">Kitchen</option>
+  <option selected={Initialdata.category=="Makeup"}value="Makeup">Makeup</option>
     </select>
   </div>
+  
 </div>
 
     <div className="flex justify-between items-center mb-6">
@@ -404,22 +351,60 @@ function handlePreview(){
 
       <div className="flex justify-center">
   <div className="form-check form-check-inline">
-    <input className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="inlineCheckbox1" value="option1"/>
-    <label className="form-check-label inline-block text-gray-800" htmlFor="inlineCheckbox1">1</label>
+    <input className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="inlineCheckbox1" value="option1"checked={Initialdata.hour}
+             onClick={(e)=>{setinitialData({
+            ...Initialdata,
+            hour:!Initialdata.hour
+            
+        })}}/>
+    <label className="form-check-label inline-block text-gray-800" htmlFor="inlineCheckbox1">Hourly</label>
   </div>
   <div className="form-check form-check-inline">
-    <input className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="inlineCheckbox2" value="option2"/>
-    <label className="form-check-label inline-block text-gray-800" htmlFor="inlineCheckbox2">2</label>
+    <input className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="inlineCheckbox2" value="option2"  checked={Initialdata.Day}
+           onClick={(e)=>{setinitialData({
+            ...Initialdata,
+            Day:!Initialdata.Day
+            
+        })}}/>
+    <label className="form-check-label inline-block text-gray-800" htmlFor="inlineCheckbox2">Daily</label>
   </div>
   <div className="form-check form-check-inline">
-    <input className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2" type="checkbox" id="inlineCheckbox3" value="option3" />
-    <label className="form-check-label inline-block text-gray-800 opacity-50" htmlFor="inlineCheckbox3">3 </label>
+    <input className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2" type="checkbox" id="inlineCheckbox3" value="option3"  checked={Initialdata.Month}
+      onClick={(e)=>{setinitialData({
+       ...Initialdata,
+       Month:!Initialdata.Month
+       
+   })}}/>
+    <label className="form-check-label inline-block text-gray-800 " htmlFor="inlineCheckbox3">Monthly </label>
   </div>
 </div>
-      <a href="#!"
-        className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Forgot
-        password?</a>
+     
     </div>
+    <div className='flex flex-col'>
+    {Initialdata.hour==true?<><label>Hourly Price</label> 
+<input value={Initialdata.hourlyprice} 
+ onChange={(e)=>{setinitialData({
+            ...Initialdata,
+            hourlyprice:parseInt(e.target.value)
+            
+        })}} type="number"/></>:null}
+        
+{Initialdata.Day==true?<><label>Daily Price</label> 
+<input value={Initialdata.dailyprice} 
+ onChange={(e)=>{setinitialData({
+            ...Initialdata,
+            dailyprice:parseInt(e.target.value)
+            
+        })}} type="number"/></>:null}
+
+{Initialdata.Month==true?<><label>Monthly Price</label> 
+<input value={Initialdata.monthlyprice} 
+ onChange={(e)=>{setinitialData({
+            ...Initialdata,
+            monthlyprice:parseInt(e.target.value)
+            
+        })}} type="number"/></>:null}
+        </div>
     <button type="submit" className="
       w-full
       px-6
@@ -437,10 +422,9 @@ function handlePreview(){
       active:bg-blue-800 active:shadow-lg
       transition
       duration-150
-      ease-in-out">Sign in</button>
-    <p className="text-gray-800 mt-6 text-center">Not a member? <a href="#!"
-        className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Register</a>
-    </p>
+      ease-in-out"
+      onClick={handlePreview}>See Preview</button>
+
   </form>
 </div>
       </>
