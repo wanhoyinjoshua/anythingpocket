@@ -20,33 +20,65 @@ import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import {Slidenext,Slideback} from '../components/Slideimages';
+import Preview from "../components/Preview"
+interface post{
+  frontview:string,
+  rearview:string,
+  sideview:string,
+  frontviewcaption?:string,
+  rearviewcaption?:string,
+  sideviewcaption?:string,
+
+  title:string,
+  description:string,
+  hour:boolean,
+  Day:boolean,
+  Month:boolean,
+  hourlyprice:number,
+  dailyprice:number,
+  monthlyprice:number,
+  category:string,
+
+
+}
+var initialpsot={
+
+  frontview:"",
+  rearview:"",
+  sideview:"",
+  title:"",
+  description:"",
+  frontviewcaption:"",
+  rearviewcaption:"",
+  sideviewcaption:"",
+  hour:false,
+  Day:false,
+  Month:false,
+  hourlyprice:10,
+  dailyprice:30,
+  monthlyprice:60,
+  category:"",
+
+
+}
+
 const Home: NextPage = () => {
   const theme = useTheme();let reference:  any
   const swiper = useSwiper();
   let reactSwipeEl: ReactSwipe | null;
   const [activeStep, setActiveStep] = React.useState<number|undefined>(0);
-  const [Initialdata,setinitialData]= useState<any>({frontview:"", rearview:"",sideview:""})
+  const [Initialdata,setinitialData]= useState<post>(initialpsot)
+  const [first,setFirst]=useState<Boolean>(true)
   const[second,setSecond]=useState<Boolean>(false)
-  function next(swiper:any){
-    console.log(swiper)
-  var currentposition= swiper?.getPos()
-  console.log(currentposition)
+  const [preview,setPreview]=useState<Boolean>(false)
+function handlePreview(){
+  //submit the form here.
+  //go to a preivew mode
+  // from there I submit the form..
+  setFirst(false);setSecond(false)
+  setPreview(true)
+}
 
-  if(swiper&&currentposition!=null){
-    setActiveStep(currentposition+1)
-    swiper.slide(currentposition+1,500)}
-
- }
- function previous (swiper:ReactSwipe | null){
-  var currentposition= swiper?.getPos()
-  
-  if(swiper&&currentposition!=null){
-    setActiveStep(currentposition-1)
-    swiper.slide(currentposition-1,500)
-  }
-  
-
- }
 
 
   return (
@@ -57,8 +89,9 @@ const Home: NextPage = () => {
         <link rel="manifest" href="/manifest.json" />
       </Head>
     <Link href="/api/auth/login">Login</Link>
+    <br></br>
     
-  
+
    
    
 
@@ -67,7 +100,8 @@ const Home: NextPage = () => {
 
 
 
-{second==false&& <Swiper
+{first==true&& 
+<Swiper
       // install Swiper modules
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       spaceBetween={50}
@@ -82,7 +116,13 @@ const Home: NextPage = () => {
         
    
         <label>Front view</label>
-        <input/>
+        <input type="text"  value ={Initialdata.frontviewcaption}onChange={(e)=>{
+    
+    setinitialData({
+            ...Initialdata,
+            frontviewcaption:e.target.value
+            
+        })}}/>
         <br>
         </br>
         {Initialdata.frontview==""?
@@ -134,7 +174,13 @@ const Home: NextPage = () => {
         height={400}
         />
           <label>Rear view</label>
-        <input/>
+        <input type="text"  value ={Initialdata.rearviewcaption}onChange={(e)=>{
+    
+    setinitialData({
+            ...Initialdata,
+            rearviewcaption:e.target.value
+            
+        })}}/>
           </div></SwiperSlide>
    
       <SwiperSlide><div>
@@ -151,7 +197,13 @@ const Home: NextPage = () => {
         height={400}
         />
           <label>Side view</label>
-        <input/>
+        <input type="text"  value ={Initialdata.sideviewcaption}onChange={(e)=>{
+    
+    setinitialData({
+            ...Initialdata,
+            sideviewcaption:e.target.value
+            
+        })}}/>
           </div></SwiperSlide>
 
           <SwiperSlide><div>
@@ -173,21 +225,231 @@ const Home: NextPage = () => {
         }
       />
 
-<button onClick={()=>{setSecond(true)}}>SHow second form</button>
+<button onClick={()=>{setFirst(false);setSecond(true)}}>SHow second form</button>
 
     </Swiper>}
    
 
     
-    {second&& <div>
-      <button onClick={()=>{setSecond(false)}}>SHow first form</button>
+{second==true && 
+<>
+    <div>
+      <button onClick={()=>{setFirst(true);setSecond(false);setPreview(false)}}>SHow first form</button>
       
       seond form here
+      <label>title of product</label>
+      <input value={Initialdata.title} type="text" onChange={(e)=>{setinitialData({
+            ...Initialdata,
+            title:e.target.value
+            
+        })}}/>
+<br></br>
+      <label>Breif overall description of the product</label>
+      <input value={Initialdata.description} type="text" onChange={(e)=>{setinitialData({
+            ...Initialdata,
+            description:e.target.value
+            
+        })}}></input>
+<br></br>
+<fieldset>
+      <label>Rental methods avalable </label>
+      <input type="radio" id="huey" name="drone2" checked={Initialdata.hour}
+             onClick={(e)=>{setinitialData({
+            ...Initialdata,
+            hour:!Initialdata.hour
+            
+        })}} />
+      <label htmlFor="huey">Hours</label>
 
-      <button>Subit the form</button>
+      <input type="radio" id="Days" name="drone" value="huey"
+           checked={Initialdata.Day}
+           onClick={(e)=>{setinitialData({
+            ...Initialdata,
+            Day:!Initialdata.Day
+            
+        })}} />
+      <label htmlFor="Days">Days</label>
+      <input type="radio" id="Months" name="drone1" value="huey"
+      checked={Initialdata.Month}
+      onClick={(e)=>{setinitialData({
+       ...Initialdata,
+       Month:!Initialdata.Month
+       
+   })}}
+            />
+      <label htmlFor="Months">Months</label>
+<br></br>
+</fieldset>
+
+{Initialdata.hour&&<><label>Hourly Price</label> 
+<input value={Initialdata.hourlyprice} 
+ onChange={(e)=>{setinitialData({
+            ...Initialdata,
+            hourlyprice:parseInt(e.target.value)
+            
+        })}} type="number"/></>}
+        <br></br>
+{Initialdata.Day&&<><label>Daily Price</label> 
+<input value={Initialdata.dailyprice} 
+ onChange={(e)=>{setinitialData({
+            ...Initialdata,
+            dailyprice:parseInt(e.target.value)
+            
+        })}} type="number"/></>}
+<br></br>
+{Initialdata.Month&&<><label>Monthly Price</label> 
+<input value={Initialdata.monthlyprice} 
+ onChange={(e)=>{setinitialData({
+            ...Initialdata,
+            monthlyprice:parseInt(e.target.value)
+            
+        })}} type="number"/></>}
       
-      </div>}
 
+
+<br></br>
+      <label htmlFor="category">Caterory:</label>
+
+<select name="cars" id="cars"   onChange={(e)=>{setinitialData({
+            ...Initialdata,
+            category:e.target.value
+            
+        })}} >
+  <option selected={Initialdata.category=="Car"}value="Car">Car</option>
+  <option selected={Initialdata.category=="Toys"} value="Toys">Toys</option>
+  <option selected={Initialdata.category=="Kitchen"}value="Kitchen">Kitchen</option>
+  <option selected={Initialdata.category=="Makeup"}value="Makeup">Makeup</option>
+</select>
+
+
+<br></br>
+
+      <button onClick={handlePreview}>Preview the form</button>
+      
+      </div>
+      <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
+  <form>
+    <div className="form-group mb-6">
+      <label htmlFor="exampleInputEmail2" className="form-label inline-block mb-2 text-gray-700">Title of the post</label>
+      <input type="email" className="form-control
+        block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInputEmail2"
+        aria-describedby="emailHelp" placeholder="An Awesome title!!!"/>
+    </div>
+    <div className="form-group mb-6">
+    <label htmlFor="exampleInputEmail2" className="form-label inline-block mb-2 text-gray-700">Description of the post</label>
+      <textarea
+      className="
+        form-control
+        block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+      "
+      id="exampleFormControlTextarea13"
+      rows={3}
+      placeholder="Message"
+    ></textarea>
+    </div>
+
+    <div className="flex justify-center">
+  <div className="mb-3 xl:w-96">
+    <select className="form-select appearance-none
+      block
+      w-full
+      px-3
+      py-1.5
+      text-base
+      font-normal
+      text-gray-700
+      bg-white bg-clip-padding bg-no-repeat
+      border border-solid border-gray-300
+      rounded
+      transition
+      ease-in-out
+      m-0
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+    </select>
+  </div>
+</div>
+
+    <div className="flex justify-between items-center mb-6">
+     
+
+      <div className="flex justify-center">
+  <div className="form-check form-check-inline">
+    <input className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="inlineCheckbox1" value="option1"/>
+    <label className="form-check-label inline-block text-gray-800" htmlFor="inlineCheckbox1">1</label>
+  </div>
+  <div className="form-check form-check-inline">
+    <input className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" id="inlineCheckbox2" value="option2"/>
+    <label className="form-check-label inline-block text-gray-800" htmlFor="inlineCheckbox2">2</label>
+  </div>
+  <div className="form-check form-check-inline">
+    <input className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2" type="checkbox" id="inlineCheckbox3" value="option3" />
+    <label className="form-check-label inline-block text-gray-800 opacity-50" htmlFor="inlineCheckbox3">3 </label>
+  </div>
+</div>
+      <a href="#!"
+        className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Forgot
+        password?</a>
+    </div>
+    <button type="submit" className="
+      w-full
+      px-6
+      py-2.5
+      bg-blue-600
+      text-white
+      font-medium
+      text-xs
+      leading-tight
+      uppercase
+      rounded
+      shadow-md
+      hover:bg-blue-700 hover:shadow-lg
+      focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+      active:bg-blue-800 active:shadow-lg
+      transition
+      duration-150
+      ease-in-out">Sign in</button>
+    <p className="text-gray-800 mt-6 text-center">Not a member? <a href="#!"
+        className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Register</a>
+    </p>
+  </form>
+</div>
+      </>
+      
+      
+      }
+
+    
+{preview==true&&<><button type="button" className="inline-block px-6 py-2.5 bg-gray-200 text-gray-700 font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"onClick={()=>{setPreview(false);setSecond(true);setFirst(false)}}>Go back and edit</button><Preview {...Initialdata}></Preview><button>Submit the form</button><div>Preview</div></>}
    
       
     
