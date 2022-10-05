@@ -2,7 +2,7 @@ import React from 'react'
 
 const emailverficiationrequired = () => {
   return (
-    <div>email-verficiation-required</div>
+    <div>bulshit shihtijkzdhfjkhskjfhkzdjhfk</div>
   )
 }
 
