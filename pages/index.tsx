@@ -126,9 +126,26 @@ function handlePreview(){
         <br>
         </br>
         {Initialdata.frontview==""?
-        <div>no picture yet 
-
-<input type="file" accept="image/*" capture="environment" 
+        <div className="flex justify-center">
+        <div className="block rounded-lg shadow-lg bg-white max-w-sm text-center">
+          <div className="py-3 px-6 border-b border-gray-300">
+            Opps...
+          </div>
+          <div className="p-6">
+            <h5 className="text-gray-900 text-xl font-medium mb-2">Front View </h5>
+            <p className="text-gray-700 text-base mb-4">
+             You have not uploaded a picture yet
+            </p>
+            
+            <input type="file" accept="image/*" capture="environment" 
+            className="text-sm text-grey-500
+            file:mr-5 file:py-2 file:px-6
+            file:rounded-full file:border-0
+            file:text-sm file:font-medium
+            file:bg-blue-50 file:text-blue-700
+            hover:file:cursor-pointer hover:file:bg-amber-50
+            hover:file:text-amber-700
+          " 
       onChange={(e)=>{
     if (!e.target.files) return;
     setinitialData({
@@ -136,9 +153,11 @@ function handlePreview(){
             frontview:URL.createObjectURL(e.target.files[0])
             
         })}}/>
-          
-          
-           </div>:  <><Image src={`${Initialdata.frontview}`}
+
+          </div>
+         
+        </div>
+      </div>:  <><Image src={`${Initialdata.frontview}`}
         width={200}
         height={400}
         />
@@ -160,43 +179,11 @@ function handlePreview(){
       
           
           </div></SwiperSlide>
-      <SwiperSlide><div>
-      <input type="file" accept="image/*" capture="environment"
-      onChange={(e)=>{
-        if (!e.target.files) return;
-        setinitialData({
-                ...Initialdata,
-                rearview:URL.createObjectURL(e.target.files[0])
-                
-            })}}/>
-             <Image src={`${Initialdata.rearview}`}
-        width={200}
-        height={400}
-        />
-          <label>Rear view</label>
-        <input type="text"  value ={Initialdata.rearviewcaption}onChange={(e)=>{
-    
-    setinitialData({
-            ...Initialdata,
-            rearviewcaption:e.target.value
-            
-        })}}/>
-          </div></SwiperSlide>
+
+          <SwiperSlide><div>
+        
    
-      <SwiperSlide><div>
-      <input type="file" accept="image/*" capture="environment"
-      onChange={(e)=>{
-        if (!e.target.files) return;
-        setinitialData({
-                ...Initialdata,
-                sideview:URL.createObjectURL(e.target.files[0])
-                
-            })}}/>
-          <Image src={`${Initialdata.sideview}`}
-        width={200}
-        height={400}
-        />
-          <label>Side view</label>
+        <label>Side view</label>
         <input type="text"  value ={Initialdata.sideviewcaption}onChange={(e)=>{
     
     setinitialData({
@@ -204,13 +191,204 @@ function handlePreview(){
             sideviewcaption:e.target.value
             
         })}}/>
+        <br>
+        </br>
+        {Initialdata.sideview==""?
+        <div className="flex justify-center">
+        <div className="block rounded-lg shadow-lg bg-white max-w-sm text-center">
+          <div className="py-3 px-6 border-b border-gray-300">
+            Opps...
+          </div>
+          <div className="p-6">
+            <h5 className="text-gray-900 text-xl font-medium mb-2">Side View </h5>
+            <p className="text-gray-700 text-base mb-4">
+             You have not uploaded a picture yet
+            </p>
+            
+            <input type="file" accept="image/*" capture="environment" 
+            className="text-sm text-grey-500
+            file:mr-5 file:py-2 file:px-6
+            file:rounded-full file:border-0
+            file:text-sm file:font-medium
+            file:bg-blue-50 file:text-blue-700
+            hover:file:cursor-pointer hover:file:bg-amber-50
+            hover:file:text-amber-700
+          " 
+      onChange={(e)=>{
+    if (!e.target.files) return;
+    setinitialData({
+            ...Initialdata,
+            sideview:URL.createObjectURL(e.target.files[0])
+            
+        })}}/>
+
+          </div>
+         
+        </div>
+      </div>:  <><Image src={`${Initialdata.sideview}`}
+        width={200}
+        height={400}
+        />
+
+<input type="file" accept="image/*" capture="environment" 
+      onChange={(e)=>{
+    if (!e.target.files) return;
+    setinitialData({
+            ...Initialdata,
+            sideview:URL.createObjectURL(e.target.files[0])
+            
+        })}}/>
+
+        </>
+
+        
+        
+        }
+      
+          
           </div></SwiperSlide>
 
           <SwiperSlide><div>
-      <input type="file" accept="image/*" capture="environment"/>
-            <img src="http://placekitten.com/g/400/200" />
+        
+   
+        <label>Rear view</label>
+        <input type="text"  value ={Initialdata.rearviewcaption}onChange={(e)=>{
+    
+    setinitialData({
+            ...Initialdata,
+            rearviewcaption:e.target.value
+            
+        })}}/>
+        <br>
+        </br>
+        {Initialdata.rearview==""?
+        <div className="flex justify-center">
+        <div className="block rounded-lg shadow-lg bg-white max-w-sm text-center">
+          <div className="py-3 px-6 border-b border-gray-300">
+            Opps...
+          </div>
+          <div className="p-6">
+            <h5 className="text-gray-900 text-xl font-medium mb-2">Rear View </h5>
+            <p className="text-gray-700 text-base mb-4">
+             You have not uploaded a picture yet
+            </p>
+            
+            <input type="file" accept="image/*" capture="environment" 
+            className="text-sm text-grey-500
+            file:mr-5 file:py-2 file:px-6
+            file:rounded-full file:border-0
+            file:text-sm file:font-medium
+            file:bg-blue-50 file:text-blue-700
+            hover:file:cursor-pointer hover:file:bg-amber-50
+            hover:file:text-amber-700
+          " 
+      onChange={(e)=>{
+    if (!e.target.files) return;
+    setinitialData({
+            ...Initialdata,
+            rearview:URL.createObjectURL(e.target.files[0])
+            
+        })}}/>
+
+          </div>
+         
+        </div>
+      </div>:  <><Image src={`${Initialdata.rearview}`}
+        width={200}
+        height={400}
+        />
+
+<input type="file" accept="image/*" capture="environment" 
+      onChange={(e)=>{
+    if (!e.target.files) return;
+    setinitialData({
+            ...Initialdata,
+            rearview:URL.createObjectURL(e.target.files[0])
+            
+        })}}/>
+
+        </>
+
+        
+        
+        }
+      
+          
           </div></SwiperSlide>
 
+          <SwiperSlide><div>
+        
+   
+        <label>Front view</label>
+        <input type="text"  value ={Initialdata.frontviewcaption}onChange={(e)=>{
+    
+    setinitialData({
+            ...Initialdata,
+            frontviewcaption:e.target.value
+            
+        })}}/>
+        <br>
+        </br>
+        {Initialdata.frontview==""?
+        <div className="flex justify-center">
+        <div className="block rounded-lg shadow-lg bg-white max-w-sm text-center">
+          <div className="py-3 px-6 border-b border-gray-300">
+            Opps...
+          </div>
+          <div className="p-6">
+            <h5 className="text-gray-900 text-xl font-medium mb-2">Front View </h5>
+            <p className="text-gray-700 text-base mb-4">
+             You have not uploaded a picture yet
+            </p>
+            
+            <input type="file" accept="image/*" capture="environment" 
+            className="text-sm text-grey-500
+            file:mr-5 file:py-2 file:px-6
+            file:rounded-full file:border-0
+            file:text-sm file:font-medium
+            file:bg-blue-50 file:text-blue-700
+            hover:file:cursor-pointer hover:file:bg-amber-50
+            hover:file:text-amber-700
+          " 
+      onChange={(e)=>{
+    if (!e.target.files) return;
+    setinitialData({
+            ...Initialdata,
+            frontview:URL.createObjectURL(e.target.files[0])
+            
+        })}}/>
+
+          </div>
+         
+        </div>
+      </div>:  <><Image src={`${Initialdata.frontview}`}
+        width={200}
+        height={400}
+        />
+
+<input type="file" accept="image/*" capture="environment" 
+      onChange={(e)=>{
+    if (!e.target.files) return;
+    setinitialData({
+            ...Initialdata,
+            frontview:URL.createObjectURL(e.target.files[0])
+            
+        })}}/>
+
+        </>
+
+        
+        
+        }
+      
+          
+          </div></SwiperSlide>
+
+
+
+     
+    
+          
       
       
       <MobileStepper
